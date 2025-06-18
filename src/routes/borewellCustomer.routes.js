@@ -6,7 +6,7 @@ const {
   getBorewellCustomer,
   updateBorewellCustomer,
   deleteBorewellCustomer,
-} = require("../controllers/borewellCustomer.controller");
+} = require("../controllers/borewellCustomer.controller.js");
 
 // Create a new borewell customer
 router.post("/", createBorewellCustomer);
