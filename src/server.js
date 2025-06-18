@@ -26,7 +26,7 @@ const app = express();
 // );
 app.use(
   cors({
-    origin: "*",
+    origin: "https://admin.bluetracktechnologies.com",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true, // 🔥 Allow credentials
