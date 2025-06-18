@@ -62,6 +62,10 @@ app.use("/api/plans", plansRoutes);
 app.use("/api/sensor-readings", sensorReadingRoutes);
 
 app.use(errorHandler);
+app.get("/", (req, res) => {
+  res.send("✅ Backend is up and running!");
+});
+
 
 mongoose
   .connect(process.env.MONGODB_URI)
