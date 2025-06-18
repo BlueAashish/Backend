@@ -43,11 +43,11 @@ const products = [
       <tr><th>Country of Origin</th><td>Made in India</td></tr>
     </table>`,
     images: [
-      "http://localhost:5000/images/telemetry-system/image1.JPG",
-      "http://localhost:5000/images/telemetry-system/image2.JPG",
-      "http://localhost:5000/images/telemetry-system/image3.JPG",
-      "http://localhost:5000/images/telemetry-system/image4.JPG",
-      "http://localhost:5000/images/telemetry-system/image5.JPG",
+      "https://api.bluetracktechnologies.com/images/telemetry-system/image1.JPG",
+      "https://api.bluetracktechnologies.com/images/telemetry-system/image2.JPG",
+      "https://api.bluetracktechnologies.com/images/telemetry-system/image3.JPG",
+      "https://api.bluetracktechnologies.com/images/telemetry-system/image4.JPG",
+      "https://api.bluetracktechnologies.com/images/telemetry-system/image5.JPG",
     ],
   },
   {
@@ -93,11 +93,11 @@ const products = [
           <tr><th>Enclosure</th><td>IP65 rated</td></tr>
         </table>`,
     images: [
-      "http://localhost:5000/images/digital-water-level-recorder/image1.jpg",
-      "http://localhost:5000/images/digital-water-level-recorder/image2.jpg",
-      "http://localhost:5000/images/digital-water-level-recorder/image3.jpg",
-      "http://localhost:5000/images/digital-water-level-recorder/image4.jpg",
-      "http://localhost:5000/images/digital-water-level-recorder/image5.jpg",
+      "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image1.jpg",
+      "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image2.jpg",
+      "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image3.jpg",
+      "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image4.jpg",
+      "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image5.jpg",
       "/images/digital-water-level-recorder/image6.jpg",
     ],
   },
