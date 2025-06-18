@@ -6,7 +6,7 @@ const {
   getAllReadings,
   getDeviceReadings,
   createReading,
-} = require("../controllers/reading.controller");
+} = require("../controllers/reading.controller.js");
 
 router.get("/", [auth, adminOnly], getAllReadings);
 

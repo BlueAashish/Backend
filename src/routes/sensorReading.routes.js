@@ -12,7 +12,7 @@ const {
   getDailyFlowData,
   getAllReadingsByMonitoringUnitId,
   getReadingsByUser,
-} = require("../controllers/sensorReading.controller");
+} = require("../controllers/sensorReading.controller.js");
 
 // Create a new reading
 router.post("/", createReading);

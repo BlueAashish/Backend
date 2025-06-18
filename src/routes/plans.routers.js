@@ -1,5 +1,5 @@
 // routes/plansRoutes.js
-const { createPlan, getPlans, getPlan, updatePlan, deletePlan } = require("../controllers/plan.controller");
+const { createPlan, getPlans, getPlan, updatePlan, deletePlan } = require("../controllers/plan.controller.js");
 
 
 const express = require("express");

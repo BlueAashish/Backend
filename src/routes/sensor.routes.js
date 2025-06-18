@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const sensorController = require("../controllers/sensor.controller");
+const sensorController = require("../controllers/sensor.controller.js");
 
 // Create a new sensor
 router.post("/", sensorController.createSensor);
