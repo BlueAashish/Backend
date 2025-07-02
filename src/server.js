@@ -27,6 +27,7 @@ const app = express();
 const whitelist = [
   "https://admin.bluetracktechnologies.com",
   "https://www.bluetracktechnologies.com",
+  "http://localhost:3000",
 ];
 
 const corsOptions = {
@@ -43,7 +44,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -77,7 +77,6 @@ app.use(errorHandler);
 app.get("/", (req, res) => {
   res.send("✅ Backend is up and running!");
 });
-
 
 mongoose
   .connect(process.env.MONGODB_URI)

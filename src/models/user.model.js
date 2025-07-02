@@ -5,12 +5,12 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     lastName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     password:{
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
       validate: {
         validator: function (v) {
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
     },
     companyName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     email: {
@@ -41,12 +41,12 @@ const userSchema = new mongoose.Schema(
     },
     city: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     pincode: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
       validate: {
         validator: function (v) {
@@ -57,17 +57,17 @@ const userSchema = new mongoose.Schema(
     },
     state: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     address: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     userFlowLimit: {
       type: Number,
-      required: true,
+      // required: true,
       min: 0,
     },
     role: {
