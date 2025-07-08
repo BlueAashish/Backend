@@ -320,8 +320,8 @@ exports.getAllReadingsByMonitoringUnitId = async (req, res) => {
 // Get all sensor readings for the logged-in user
 exports.getReadingsByUser = async (req, res) => {
   try {
-    const userId = req.user._id; // Set by auth middleware
-    const readings = await SensorReading.find({ userId }).sort({ readingTimestamp: -1 });
+    const userId = req.user._id; 
+    const readings = await SensorReading.find({ userId }).sort({ readingTimestamp: -1 }).populate("userId", "name email");
     res.status(200).json({
       success: true,
       count: readings.length,

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
+const tls = require("tls");
 
 const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
@@ -18,6 +19,9 @@ const errorHandler = require("./middleware/error.middleware");
 
 const app = express();
 
+// Set the default minimum TLS version for all outgoing connections
+tls.DEFAULT_MIN_VERSION = "TLSv1.2";
+
 // Configure helmet to allow images
 // app.use(
 //   helmet({
@@ -28,6 +32,7 @@ const whitelist = [
   "https://admin.bluetracktechnologies.com",
   "https://www.bluetracktechnologies.com",
   "http://localhost:3000",
+  "*",
 ];
 
 const corsOptions = {
