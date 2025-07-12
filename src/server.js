@@ -32,6 +32,7 @@ const whitelist = [
   "https://admin.bluetracktechnologies.com",
   "https://www.bluetracktechnologies.com",
   "http://localhost:3000",
+  "http://127.0.0.1:5500"
   "*",
 ];
 
