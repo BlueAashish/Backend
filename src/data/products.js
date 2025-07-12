@@ -2,32 +2,95 @@ const products = [
   {
     id: 1,
     name: "Telemetry System",
+    sortDescription:"Real-time, remote data logging and monitoring with government compliance.",
     description:
       `
-  <div>
-    <h1>Industrial Telemetry System</h1>
-    <p>
-      Our <strong>Industrial Telemetry System</strong> is a compact and intelligent data acquisition unit designed
-      for real-time remote monitoring of industrial equipment. It reads data from <strong>MODBUS RTU (RS485)</strong> 
-      compatible sensors and instruments and transmits the collected data securely to a cloud server or central control system.
-    </p>
-    <p>
-      This plug-and-play system is ideal for applications such as flow meters, water analyzers, energy meters, pressure sensors, and more.
-      With built-in fault detection, data buffering, and power-efficient operation, this unit ensures seamless and accurate data delivery,
-      even in harsh field conditions.
-    </p>
+<div>
+  <h1>What is a Telemetry System / Data Logger?</h1>
+  <p>
+    A <strong>Telemetry System</strong> or <strong>Data Logger</strong> is an intelligent, automated solution designed to collect, record, transmit, and analyze data from remote or inaccessible locations. These systems play a critical role in industries that require continuous monitoring and reporting of physical parameters such as water level, flow rate, pH, temperature, pressure, and more.
+  </p>
+  <p>
+    At its core, a data logger is a microcontroller-based device equipped with sensors, memory, and communication modules. It continuously gathers data over time, stores it internally or on the cloud, and allows users to remotely access this information via the internet or cellular networks. The telemetry system extends this functionality by transmitting data wirelessly to a centralized server or control room in real-time or at scheduled intervals.
+  </p>
 
-    <h3>Applications:</h3>
-    <ul>
-      <li>Groundwater monitoring (CGWA-compliant setups)</li>
-      <li>Flow and water quality monitoring systems</li>
-      <li>Remote industrial process monitoring</li>
-      <li>Agricultural and municipal telemetry</li>
-      <li>Energy and utility infrastructure tracking</li>
-    </ul>
+  <h3>How Does a Telemetry System Work?</h3>
+  <p>A typical telemetry/data logging system consists of the following components:</p>
+  <ol>
+    <li>
+      <strong>Sensors & Transducers:</strong> Measure physical parameters like water level, pH, turbidity, etc., and convert them into electrical signals.
+    </li>
+    <li>
+      <strong>Data Logger Unit:</strong> Processes sensor signals, timestamps them, stores data in memory, and prepares it for transmission.
+    </li>
+    <li>
+      <strong>Communication Module:</strong> Uses GSM/GPRS/4G, LoRa, NB-IoT, satellite, or Wi-Fi to send data to cloud servers or SCADA.
+    </li>
+    <li>
+      <strong>Power Supply:</strong> Typically solar-powered with battery backup for remote deployments.
+    </li>
+    <li>
+      <strong>Cloud Server / Dashboard:</strong> Visualizes and analyzes data in real-time via web or mobile platforms.
+    </li>
+  </ol>
 
-   
-  </div>
+  <h3>Applications of Telemetry & Data Logging Systems</h3>
+  <ul>
+    <li><strong>Groundwater Monitoring (Piezometers & DWLR):</strong> Track water level trends and recharge patterns for sustainability.</li>
+    <li><strong>Flow Measurement & Management:</strong> Monitor water abstraction and effluent discharge via flow meters.</li>
+    <li><strong>Environmental Monitoring:</strong> Real-time tracking of air, water, and noise pollution levels.</li>
+    <li><strong>Agriculture & Irrigation:</strong> Automate and optimize irrigation through soil and pump monitoring.</li>
+    <li><strong>Smart Cities & Infrastructure:</strong> Manage utilities such as sewage, flood detection, and water supply.</li>
+    <li><strong>Industrial Automation:</strong> Monitor industrial processes in sectors like oil & gas, mining, and manufacturing.</li>
+  </ul>
+
+  <h3>Government Mandates on Telemetry Systems</h3>
+  <ol>
+    <li>
+      <strong>CGWA Compliance:</strong> 
+      Requires DWLRs and Electromagnetic Flow Meters with telemetry to transmit water usage data every 15 minutes.
+    </li>
+    <li>
+      <strong>CPCB Norms:</strong> 
+      Mandates OCEMS for real-time monitoring of industrial effluents with telemetry connectivity to pollution control boards.
+    </li>
+    <li>
+      <strong>Jal Shakti Abhiyan & Atal Bhujal Yojana:</strong> 
+      Promotes telemetry systems for aquifer mapping and data-driven water management.
+    </li>
+    <li>
+      <strong>Other Local Guidelines:</strong> 
+      State-level mandates for canal monitoring, rainwater harvesting, and dam safety using telemetry.
+    </li>
+  </ol>
+
+  <h3>Benefits of Using a Telemetry System</h3>
+  <ul>
+    <li>Uninterrupted 24x7 monitoring of remote assets</li>
+    <li>Accurate, tamper-proof data collection with real-time alerts</li>
+    <li>Predictive maintenance and smart decision-making</li>
+    <li>Compliance with government regulations</li>
+    <li>Reduces manual efforts and field visits</li>
+    <li>Promotes accountability and transparency</li>
+  </ul>
+
+  <h3>Why Choose Our Telemetry/Data Logger Systems?</h3>
+  <p>
+    At <strong>BlueTrack Technologies</strong>, we design and manufacture CGWA-compliant, robust, solar-powered telemetry systems with features including:
+  </p>
+  <ul>
+    <li>DWLR with piezometer support</li>
+    <li>Flow meter and sensor integration</li>
+    <li>GSM/GPRS/4G cloud communication</li>
+    <li>Rugged enclosures for field use</li>
+    <li>SCADA system compatibility</li>
+    <li>Custom web dashboards and mobile access</li>
+  </ul>
+  <p>
+    Whether you're a groundwater user, government agency, or environmental consultant — our systems ensure compliance, efficiency, and future-readiness.
+  </p>
+</div>
+
 `,
     specification: `
     
@@ -43,11 +106,12 @@ const products = [
       <tr><th>Country of Origin</th><td>Made in India</td></tr>
     </table>`,
     images: [
+      "https://api.bluetracktechnologies.com/images/telemetry-system/t2.JPG",
+      "https://api.bluetracktechnologies.com/images/telemetry-system/t1.JPG",
       "https://api.bluetracktechnologies.com/images/telemetry-system/image1.JPG",
       "https://api.bluetracktechnologies.com/images/telemetry-system/image2.JPG",
       "https://api.bluetracktechnologies.com/images/telemetry-system/image3.JPG",
-      "https://api.bluetracktechnologies.com/images/telemetry-system/image4.JPG",
-      "https://api.bluetracktechnologies.com/images/telemetry-system/image5.JPG",
+      
     ],
   },
   {
@@ -102,5 +166,6 @@ const products = [
     ],
   },
 ];
+
 
 module.exports = products;
