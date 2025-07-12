@@ -107,7 +107,7 @@ const products = [
     </table>`,
     images: [
       "https://api.bluetracktechnologies.com/images/telemetry-system/TELE Ai image.png",
-      "https://api.bluetracktechnologies.com/images/telemetry-system/ELE 2 Ai image.png",
+      "https://api.bluetracktechnologies.com/images/telemetry-system/TELE 2 Ai image.png",
       "https://api.bluetracktechnologies.com/images/telemetry-system/image1.JPG",
       "https://api.bluetracktechnologies.com/images/telemetry-system/image2.JPG",
       "https://api.bluetracktechnologies.com/images/telemetry-system/image3.JPG",
