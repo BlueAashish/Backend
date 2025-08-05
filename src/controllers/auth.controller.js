@@ -9,15 +9,20 @@ const login = async (req, res, next) => {
     const errors = validationResult(req.body);
     if (!errors.isEmpty()) {
       // Send only error message to frontend
-      return res.status(400).json({ success: false, message: "Validation Error" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Validation Error" });
     }
 
     const { email, password } = req.body;
     const result = await authService.login(email, password);
+    console.log("result", result);
     res.json(result);
   } catch (error) {
     // Send only error message to frontend
-    res.status(401).json({ success: false, message: error.message || "Login failed" });
+    res
+      .status(401)
+      .json({ success: false, message: error.message || "Login failed" });
   }
 };
 

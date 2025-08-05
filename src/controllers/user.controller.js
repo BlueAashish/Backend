@@ -1,31 +1,53 @@
 const crypto = require("crypto");
 const User = require("../models/user.model");
+const { sendUserCredentials } = require("../utils/emailService");
 
 const createUser = async (req, res) => {
   try {
     // Generate a random password
     const generatedPassword = crypto.randomBytes(8).toString("hex");
-    // Save password as plain text (not recommended for production)
+
     const user = new User({
       ...req.body,
-      password: generatedPassword, // plain text
-      subscription: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year subscription
+      password: generatedPassword,
+      subscription: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
     });
-    // Temporarily disable pre-save password hashing if present
-    user.save({ validateBeforeSave: false })
-      .then(() => {
-        res.status(201).json({
-          success: true,
-          data: user,
-          password: generatedPassword, // Return generated password (for admin to share)
-        });
-      })
-      .catch((error) => {
-        res.status(500).json({
-          success: false,
-          error: error.message,
-        });
+
+    const savedUser = await user.save();
+
+    const userDataForEmail = {
+      name: savedUser.firstName
+        ? `${savedUser.firstName} ${savedUser.lastName || ""}`.trim()
+        : savedUser.email,
+      email: savedUser.email,
+      password: generatedPassword,
+    };
+
+    const emailResult = await sendUserCredentials(userDataForEmail);
+
+    if (emailResult.success) {
+      res.status(201).json({
+        success: true,
+        data: {
+          ...savedUser.toObject(),
+          password: undefined,
+        },
+        password: generatedPassword,
+        emailSent: true,
+        message: "User created successfully and credentials sent via email",
       });
+    } else {
+      res.status(201).json({
+        success: true,
+        data: {
+          ...savedUser.toObject(),
+        },
+        password: generatedPassword, // Return original password for admin reference
+        emailSent: false,
+        emailError: emailResult.error,
+        message: "User created successfully but email delivery failed",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       success: false,

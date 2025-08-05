@@ -39,10 +39,7 @@ router.get("/monitoring-unit/:monitoringUnitId/latest", getLatestReading);
 router.get("/monitoring-unit/:monitoringUnitId/daily-flow", getDailyFlowData);
 
 // Get all readings for a given monitoringUnitId (POST, expects { monitoringUnitId } in body)
-router.post(
-  "/all-by-monitoring-unit",
-  getAllReadingsByMonitoringUnitId
-);
+router.post("/all-by-monitoring-unit", getAllReadingsByMonitoringUnitId);
 
 // Get all sensor readings for the logged-in user
 router.get("/user/all", auth, getReadingsByUser);
