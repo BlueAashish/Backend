@@ -85,7 +85,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI || "mongodb+srv://bluetrackinfo:w4fbjp0spba2DbYg@cluster0.cyevubq.mongodb.net/BlueTrack?retryWrites=true&w=majority")
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
