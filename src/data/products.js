@@ -154,6 +154,7 @@ const products = [
           <tr><th>Measuring Range</th><td>Up to 100 meters (customizable)</td></tr>
           <tr><th>Enclosure</th><td>IP65 rated</td></tr>
         </table>`,
+        sortDescription: "High-precision Digital Water Level Recorder with stainless steel piezometric sensor, TFT display, telemetry support, and CGWA compliance for groundwater monitoring.",
     images: [
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image1.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image2.jpg",
