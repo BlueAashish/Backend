@@ -758,7 +758,7 @@ const products = [
       <tr><th>Country of Origin</th><td>Made in India</td></tr>
     </table>`,
     images: [
-      "https://api.bluetracktechnologies.com/images/pressure-sensor/1.png",
+      "https://api.bluetracktechnologies.com/images/pressure-sensor/1.JPG",
       "https://api.bluetracktechnologies.com/images/pressure-sensor/2.png",
       "https://api.bluetracktechnologies.com/images/pressure-sensor/3.JPG",
       "https://api.bluetracktechnologies.com/images/pressure-sensor/4.JPG",
