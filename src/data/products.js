@@ -156,7 +156,6 @@ const products = [
         </table>`,
         sortDescription: "High-precision Digital Water Level Recorder with stainless steel piezometric sensor, TFT display, telemetry support, and CGWA compliance for groundwater monitoring.",
     images: [
-      "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image1.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image2.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image3.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image4.jpg",
