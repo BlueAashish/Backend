@@ -1,6 +1,12 @@
 const SensorReading = require("../models/sensorReading.model");
 const BorewellCustomer = require("../models/borewellCustomer");
 
+function canAccessReading(user, reading) {
+  if (!user || !reading) return false;
+  if (user.role === "admin") return true;
+  return String(reading.userId?._id || reading.userId) === String(user._id);
+}
+
 // Create a new sensor reading
 exports.createReading = async (req, res) => {
   try {
@@ -92,6 +98,13 @@ exports.getReadingById = async (req, res) => {
       });
     }
 
+    if (!canAccessReading(req.user, reading)) {
+      return res.status(403).json({
+        success: false,
+        error: "Access denied",
+      });
+    }
+
     res.status(200).json({
       success: true,
       data: reading,
@@ -107,14 +120,25 @@ exports.getReadingById = async (req, res) => {
 // Update a reading
 exports.updateReading = async (req, res) => {
   try {
-    const reading = await SensorReading.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
+    const existing = await SensorReading.findById(req.params.id);
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        error: "Reading not found",
+      });
+    }
+
+    if (!canAccessReading(req.user, existing)) {
+      return res.status(403).json({
+        success: false,
+        error: "Access denied",
+      });
+    }
+
+    const reading = await SensorReading.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!reading) {
       return res.status(404).json({
@@ -138,6 +162,21 @@ exports.updateReading = async (req, res) => {
 // Delete a reading
 exports.deleteReading = async (req, res) => {
   try {
+    const existing = await SensorReading.findById(req.params.id);
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        error: "Reading not found",
+      });
+    }
+
+    if (!canAccessReading(req.user, existing)) {
+      return res.status(403).json({
+        success: false,
+        error: "Access denied",
+      });
+    }
+
     const reading = await SensorReading.findByIdAndDelete(req.params.id);
 
     if (!reading) {

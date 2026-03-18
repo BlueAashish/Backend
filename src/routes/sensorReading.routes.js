@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { auth } = require("../middleware/auth.middleware");
+const { auth, adminOnly } = require("../middleware/auth.middleware");
 const {
   createReading,
   getReadings,
@@ -18,16 +18,7 @@ const {
 router.post("/", createReading);
 
 // Get all readings with optional filters
-router.get("/", getReadings);
-
-// Get a single reading by ID
-router.get("/:id", getReadingById);
-
-// Update a reading
-router.put("/:id", updateReading);
-
-// Delete a reading
-router.delete("/:id", deleteReading);
+router.get("/", auth, adminOnly, getReadings);
 
 // Get readings by monitoring unit ID
 router.get("/monitoring-unit/:monitoringUnitId", getReadingsByMonitoringUnit);
@@ -43,5 +34,14 @@ router.post("/all-by-monitoring-unit", getAllReadingsByMonitoringUnitId);
 
 // Get all sensor readings for the logged-in user
 router.get("/user/all", auth, getReadingsByUser);
+
+// Get a single reading by ID
+router.get("/:id", auth, getReadingById);
+
+// Update a reading
+router.put("/:id", auth, updateReading);
+
+// Delete a reading
+router.delete("/:id", auth, deleteReading);
 
 module.exports = router;

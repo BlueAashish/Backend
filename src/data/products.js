@@ -1,7 +1,7 @@
 const products = [
   {
     id: 1,
-    name: "Telemetry System",
+    name: "Data Logger",
     sortDescription:
       "Real-time, remote data logging and monitoring with government compliance.",
     description: `
@@ -154,14 +154,15 @@ const products = [
           <tr><th>Measuring Range</th><td>Up to 100 meters (customizable)</td></tr>
           <tr><th>Enclosure</th><td>IP65 rated</td></tr>
         </table>`,
-        sortDescription: "High-precision Digital Water Level Recorder with stainless steel piezometric sensor, TFT display, telemetry support, and CGWA compliance for groundwater monitoring.",
+    sortDescription:
+      "High-precision Digital Water Level Recorder with stainless steel piezometric sensor, TFT display, telemetry support, and CGWA compliance for groundwater monitoring.",
     images: [
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image1.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image2.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image3.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image4.jpg",
       "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image5.jpg",
-      "/images/digital-water-level-recorder/image6.jpg",
+      "https://api.bluetracktechnologies.com/images/digital-water-level-recorder/image6.jpg",
     ],
   },
   {
@@ -765,7 +766,85 @@ const products = [
       "https://api.bluetracktechnologies.com/images/pressure-sensor/4.JPG",
     ],
   },
-  
+  {
+  id: 10,
+  name: "Air Quality Monitoring System",
+  sortDescription:
+    "Real-time ambient air quality monitoring with multi-parameter sensors and cloud connectivity.",
+  description: `
+<div>
+  <h1>What is an Air Quality Monitoring System?</h1>
+  <p>
+    An <strong>Air Quality Monitoring System (AQMS)</strong> is an integrated solution designed to continuously measure, record, and transmit air pollution data in real-time. It helps industries, smart cities, and environmental agencies monitor air quality parameters and ensure compliance with government norms such as CPCB and NAAQS.
+  </p>
+  <p>
+    The system uses a combination of particulate sensors, gas analyzers, meteorological sensors, and communication modules to track air quality in real-time. Data is securely transferred to cloud servers and can be accessed through dashboards, mobile applications, or directly by regulatory authorities.
+  </p>
+
+  <h3>How Does an Air Quality Monitoring System Work?</h3>
+  <p>A typical AQMS consists of the following components:</p>
+  <ol>
+    <li><strong>Particulate Matter Sensors:</strong> Measure PM1, PM2.5, and PM10 levels using optical/laser scattering techniques.</li>
+    <li><strong>Gas Sensors:</strong> Detect gases like CO, CO₂, SO₂, NO₂, O₃, NH₃, VOCs.</li>
+    <li><strong>Meteorological Sensors:</strong> Measure temperature, humidity.</li>
+    <li><strong>Data Logger & Controller:</strong> Records sensor readings, timestamps them, and transmits to cloud servers.</li>
+    <li><strong>Communication Module:</strong> GSM/GPRS/4G, NB-IoT, or Wi-Fi for real-time transmission.</li>
+    <li><strong>Cloud Dashboard:</strong> Visualizes air quality index (AQI), historical trends, and generates reports.</li>
+  </ol>
+
+  <h3>Applications of Air Quality Monitoring Systems</h3>
+  <ul>
+    <li><strong>Urban Monitoring:</strong> Track roadside and city-level air pollution.</li>
+    <li><strong>Industrial Monitoring:</strong> Continuous emission monitoring in plants and factories.</li>
+    <li><strong>Smart Cities:</strong> Integrate with IoT platforms for real-time air quality data.</li>
+    <li><strong>Indoor Air Quality:</strong> Monitor air quality in offices, hospitals, and schools.</li>
+    <li><strong>Research & Environmental Studies:</strong> Data collection for pollution mapping and health impact analysis.</li>
+  </ul>
+
+  <h3>Government Mandates on Air Quality Monitoring</h3>
+  <ol>
+    <li><strong>CPCB Guidelines:</strong> Continuous Ambient Air Quality Monitoring Stations (CAAQMS) for industries and cities.</li>
+    <li><strong>NAAQS Compliance:</strong> Maintain air quality standards for public health and safety.</li>
+    <li><strong>State Pollution Control Boards:</strong> Require industries to transmit real-time air data to CPCB/SPCB servers.</li>
+  </ol>
+
+  <h3>Benefits of Using Our AQMS</h3>
+  <ul>
+    <li>24x7 monitoring with cloud data access</li>
+    <li>Multi-parameter measurement in a single system</li>
+    <li>Compliance with CPCB/NAAQS guidelines</li>
+    <li>Accurate, tamper-proof data collection</li>
+    <li>Customizable dashboards and mobile app integration</li>
+    <li>Solar-powered options for remote deployment</li>
+  </ul>
+
+  <h3>Why Choose BlueTrack Technologies AQMS?</h3>
+  <p>
+    At <strong>BlueTrack Technologies</strong>, we design advanced, modular Air Quality Monitoring Systems that are robust, scalable, and compliant with CPCB guidelines. Our systems integrate seamlessly with telemetry solutions and government portals, making them suitable for industries, smart cities, and research applications.
+  </p>
+</div>
+  `,
+  specification: `
+  <h3>Technical Specification:</h3>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <tr><th>Enclosure</th><td>Outdoor weatherproof IP65 cabinet</td></tr>
+    <tr><th>Measured Parameters</th><td>PM1, PM2.5, PM10, CO, CO₂, SO₂, NO₂, O₃, NH₃, VOCs, Temp, RH, Wind, Pressure</td></tr>
+    <tr><th>Sensor Type</th><td>Electrochemical, NDIR, Optical Laser Scattering</td></tr>
+    <tr><th>Network Interface</th><td>GSM/4G, Wi-Fi, (as per model)</td></tr>
+    <tr><th>Data Format</th><td>JSON / CSV / XML</td></tr>
+    <tr><th>Operating Temperature</th><td>-10°C to +60°C</td></tr>
+    <tr><th>Power Supply</th><td>230 VAC </td></tr>
+    <tr><th>Compliance</th><td>CPCB / NAAQS / CAAQMS Standards</td></tr>
+    <tr><th>Country of Origin</th><td>Made in India</td></tr>
+  </table>`,
+  images: [
+    "https://api.bluetracktechnologies.com/images/air-quality-system/1.jpg",
+    "https://api.bluetracktechnologies.com/images/air-quality-system/2.jpg",
+    "https://api.bluetracktechnologies.com/images/air-quality-system/3.jpg",
+    "https://api.bluetracktechnologies.com/images/air-quality-system/4.jpg"
+  ]
+}
+
 ];
 
 module.exports = products;
