@@ -7,11 +7,39 @@ function canAccessReading(user, reading) {
   return String(reading.userId?._id || reading.userId) === String(user._id);
 }
 
+function parseLimit(val) {
+  if (val === undefined || val === null) return undefined;
+  const str = String(val).toLowerCase();
+  if (str === "all") return "all";
+  const n = parseInt(str, 10);
+  if (!Number.isFinite(n)) return undefined;
+  return Math.max(0, n);
+}
+
 // Create a new sensor reading
 exports.createReading = async (req, res) => {
   try {
-    const { monitoringUnitId, sensorId } = req.body;
-    let readingDoc = await SensorReading.findOne({ monitoringUnitId, sensorId });
+    const { monitoringUnitId } = req.body;
+
+    // For your system: `BorewellCustomer.serialNo` should be treated as `SensorReading.sensorId`
+    // (clients may send sensorId, but we always resolve it from backend for consistency).
+    const borewellCustomer = await BorewellCustomer.findOne({
+      monitoringUnitId,
+    });
+
+    if (!borewellCustomer) {
+      return res.status(404).json({
+        success: false,
+        error: "Monitoring unit not found",
+      });
+    }
+
+    const resolvedSensorId = borewellCustomer.serialNo;
+
+    let readingDoc = await SensorReading.findOne({
+      monitoringUnitId,
+      sensorId: resolvedSensorId,
+    });
 
     if (readingDoc) {
       const oldReading = { ...readingDoc._doc };
@@ -23,21 +51,20 @@ exports.createReading = async (req, res) => {
       if (!readingDoc.readingHistory) readingDoc.readingHistory = [];
       readingDoc.readingHistory.push(JSON.stringify(oldReading));
 
-      Object.assign(readingDoc, req.body, { readingTimestamp: new Date() });
+      Object.assign(readingDoc, req.body, {
+        sensorId: resolvedSensorId,
+        readingTimestamp: new Date(),
+      });
       await readingDoc.save();
       res.status(200).json({ success: true, data: readingDoc });
     } else {
-      const borewellCustomer = await BorewellCustomer.findOne({
-        monitoringUnitId,
+      const newReading = new SensorReading({
+        ...req.body,
+        sensorId: resolvedSensorId,
+        userId: borewellCustomer.userId,
+        readingHistory: [],
+        readingTimestamp: new Date(),
       });
-      if (!borewellCustomer) {
-        return res.status(404).json({
-          success: false,
-          error: "Monitoring unit not found",
-        });
-      }
-      const userId=borewellCustomer.userId; 
-      const newReading = new SensorReading({ ...req.body, readingHistory: [],userId });
       await newReading.save();
       res.status(201).json({ success: true, data: newReading });
     }
@@ -103,6 +130,36 @@ exports.getReadingById = async (req, res) => {
         success: false,
         error: "Access denied",
       });
+    }
+
+    // Trim heavy arrays for client optimization (used by client detail page).
+    const historyLimit = parseLimit(req.query.historyLimit);
+    const dailyFlowLimit = parseLimit(req.query.dailyFlowLimit);
+    const summary = String(req.query.summary || "false").toLowerCase() === "true";
+
+    if (summary) {
+      reading.readingHistory = [];
+      reading.dailyFlowData = [];
+    } else {
+      if (historyLimit !== undefined && historyLimit !== "all") {
+        const h = Array.isArray(reading.readingHistory)
+          ? reading.readingHistory
+          : [];
+        reading.readingHistory = historyLimit === 0 ? [] : h.slice(-historyLimit);
+      }
+
+      if (dailyFlowLimit !== undefined && dailyFlowLimit !== "all") {
+        const d = Array.isArray(reading.dailyFlowData)
+          ? reading.dailyFlowData
+          : [];
+        const sliced = dailyFlowLimit === 0 ? [] : d.slice(-dailyFlowLimit);
+
+        // Keep only fields we need for charts/tables: date + totalFlow.
+        reading.dailyFlowData = sliced.map((x) => ({
+          date: x.date,
+          totalFlow: x.totalFlow,
+        }));
+      }
     }
 
     res.status(200).json({
@@ -360,11 +417,74 @@ exports.getAllReadingsByMonitoringUnitId = async (req, res) => {
 exports.getReadingsByUser = async (req, res) => {
   try {
     const userId = req.user._id; 
-    const readings = await SensorReading.find({ userId }).sort({ readingTimestamp: -1 }).populate("userId", "name email");
+    const readings = await SensorReading.find({ userId })
+      .sort({ readingTimestamp: -1 })
+      .populate("userId", "name email");
+
+    const historyLimit = parseLimit(req.query.historyLimit);
+    const dailyFlowLimit = parseLimit(req.query.dailyFlowLimit);
+    const summary = String(req.query.summary || "false").toLowerCase() === "true";
+    const onlyWithData =
+      String(req.query.onlyWithData || (summary ? "true" : "false")).toLowerCase() ===
+      "true";
+
+    const DATA_KEYS = [
+      "waterLevel",
+      "totalFlow",
+      "currentFlow",
+      "ph",
+      "tds",
+      "cod",
+      "bod",
+      "temperature",
+      "ec",
+      "toc",
+      "tss",
+      "turbidity",
+      "chlorine",
+      "dissolvedOxygen",
+      "orp",
+      "sox",
+      "nox",
+      "pm25",
+      "pm10",
+    ];
+
+    const data = readings
+      .map((doc) => {
+        const obj = doc.toObject();
+
+        if (summary) {
+          obj.readingHistory = [];
+          obj.dailyFlowData = [];
+        } else {
+          if (historyLimit !== undefined && historyLimit !== "all") {
+            const h = Array.isArray(obj.readingHistory) ? obj.readingHistory : [];
+            obj.readingHistory = historyLimit === 0 ? [] : h.slice(-historyLimit);
+          }
+
+          if (dailyFlowLimit !== undefined && dailyFlowLimit !== "all") {
+            const d = Array.isArray(obj.dailyFlowData) ? obj.dailyFlowData : [];
+            const sliced =
+              dailyFlowLimit === 0 ? [] : d.slice(-dailyFlowLimit);
+            obj.dailyFlowData = sliced.map((x) => ({
+              date: x.date,
+              totalFlow: x.totalFlow,
+            }));
+          }
+        }
+
+        return obj;
+      })
+      .filter((r) => {
+        if (!onlyWithData) return true;
+        return DATA_KEYS.some((k) => r[k] !== null && r[k] !== undefined);
+      });
+
     res.status(200).json({
       success: true,
-      count: readings.length,
-      data: readings,
+      count: data.length,
+      data,
     });
   } catch (error) {
     res.status(400).json({
