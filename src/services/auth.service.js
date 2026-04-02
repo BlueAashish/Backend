@@ -8,14 +8,18 @@ const generateToken = (userId) => {
 };
 
 const login = async (email, password) => {
-  const user = await User.findOne({ email });
+  const normalizedEmail = (email || "").trim().toLowerCase();
+  if (!normalizedEmail) {
+    throw new AppError("Email is required", 400);
+  }
+
+  const user = await User.findOne({ email: normalizedEmail });
   console.log("User found:", user);
   if (!user) {
     throw new AppError("User not found", 404);
   }
   console.log("Comparing password:", password);
   console.log("User password:", user.password);
-  const hashedPassword = await bcryptjs.hash(password, 10);
 
   const isMatch = await bcryptjs.compare(password, user.password);
   if (!isMatch) {
