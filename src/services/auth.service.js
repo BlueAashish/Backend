@@ -8,11 +8,21 @@ const generateToken = (userId) => {
 };
 
 const login = async (email, password) => {
-  const normalizedEmail = (email || "").trim().toLowerCase();
+  const normalizedEmail = String(email || "")
+    // remove common invisible characters from copy/paste
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
+    // normalize NBSP to space, then trim
+    .replace(/\u00A0/g, " ")
+    .trim()
+    .toLowerCase()
+    .replace(/^mailto:/, "")
+    .replace(/^<|>$/g, "")
+    .replace(/[.,;:]+$/g, "");
   if (!normalizedEmail) {
     throw new AppError("Email is required", 400);
   }
 
+  console.log("Login attempt:", { rawEmail: email, normalizedEmail });
   const user = await User.findOne({ email: normalizedEmail });
   console.log("User found:", user);
   if (!user) {
