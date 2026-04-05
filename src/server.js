@@ -78,11 +78,11 @@ app.use("/api/borewell", borewell);
 app.use("/api/sensors", sensorRoutes);
 app.use("/api/plans", plansRoutes);
 app.use("/api/sensor-readings", sensorReadingRoutes);
-
-app.use(errorHandler);
 app.get("/", (req, res) => {
   res.send("✅ Backend is up and running!");
 });
+app.use(errorHandler);
+
 
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb+srv://bluetrackinfo:w4fbjp0spba2DbYg@cluster0.cyevubq.mongodb.net/BlueTrack?retryWrites=true&w=majority")
